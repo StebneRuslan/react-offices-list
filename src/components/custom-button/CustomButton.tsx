@@ -10,7 +10,9 @@ interface Button {
 export class CustomButton<Button> extends Component<Button> {
   render() {
     return (
-      <button></button>
+      <button>
+        { this.props.children }
+      </button>
     );
   }
 }
