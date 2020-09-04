@@ -18,12 +18,15 @@ export const OfficesMenuHeader = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-`
+`;
 
 export const OfficesMenuWrapper = styled.div`
-  width: 220px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
   background: rgb(233, 240, 245);
-`
+  min-width: 200px;
+`;
 
 export const OfficeMenuTitleWrapper = styled(MenuWithBottomBorder)`
   z-index: 1;
@@ -56,7 +59,7 @@ export const OfficeMenuTitleWrapper = styled(MenuWithBottomBorder)`
   &:hover {
     color: rgb(255, 255, 255);
   }
-`
+`;
 
 interface OpenedMenuTitleWrapperInterface {
   active?: boolean;
@@ -65,7 +68,7 @@ interface OpenedMenuTitleWrapperInterface {
 
 export const OpenedMenuWrapper = styled(MenuWithBottomBorder)`
   padding-bottom: 10px;
-`
+`;
 
 export const OpenedMenuTitle = styled.a<OpenedMenuTitleWrapperInterface>`
   z-index: 1;
@@ -100,4 +103,4 @@ export const OpenedMenuTitle = styled.a<OpenedMenuTitleWrapperInterface>`
       opacity: 0.8;
     `
   }
-`
+`;

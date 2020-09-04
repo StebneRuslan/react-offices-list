@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 interface ButtonInterface {
   white?: boolean;
   blue?: boolean;
+  withoutBorders?: boolean;
 }
 
 export const Button = styled.button<ButtonInterface>`
@@ -46,6 +47,14 @@ export const Button = styled.button<ButtonInterface>`
       border-width: none;
     `  
   }
+  ${props =>
+    props.withoutBorders && css`
+      border: none;
+      &:hover {
+        color: rgb(83, 104, 126);
+      }
+    `
+  }
   &:before {
     z-index: -1;
     content: '';
@@ -59,6 +68,11 @@ export const Button = styled.button<ButtonInterface>`
 
     transition: 300ms ease-out;
     transform: scale(0);
+    ${props =>
+      props.withoutBorders && css`
+        background-color: #e1e1e1;
+      `
+    }
   }
   &:hover:before { 
     transform: scale(1.4);
