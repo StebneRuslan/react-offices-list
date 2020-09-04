@@ -5,6 +5,7 @@ import { Description } from '../../shared/Description';
 import { OfficesFooter } from '../offices-footer/OfficesFooter';
 import { Button } from '../../shared/Button';
 import { OfficeCard } from '../office-card/OfficeCard';
+import { OfficeForm } from '../office-form/OfficeForm';
 
 export class OfficesList extends Component<any, any> {
   render() {
@@ -20,6 +21,7 @@ export class OfficesList extends Component<any, any> {
             <Button white>Add New Office</Button>
             <OfficeCount>1 Offices</OfficeCount>
           </OfficeControlsContainer>
+          <OfficeForm />
           <OfficeCard />
           <OfficeCard />
           <OfficeCard />
