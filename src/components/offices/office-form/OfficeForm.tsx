@@ -1,65 +1,64 @@
-import React, { Component } from 'react';
-import {
-  OfficeFormControlsWrapper, OfficeFormInputsWrapper,
-  OfficeFormWrapper
-} from './styled';
+import React from 'react';
+import { OfficeFormInputsWrapper, OfficeFormWrapper } from './styled';
 import { Button } from '../../shared/Button';
 import { InputLabel, InputTitle, TextInput } from '../../shared/TextInput';
+import { useForm } from "react-hook-form";
+import { OfficeControlsWrapper } from '../styled';
 
-export class OfficeForm extends Component {
-  render() {
-    return (
-      <OfficeFormWrapper>
-        <OfficeFormInputsWrapper>
-          <InputLabel>
-            <InputTitle>*Country:</InputTitle>
-            <TextInput />
-          </InputLabel>
-          <InputLabel>
-            <InputTitle>*State/Province:</InputTitle>
-            <TextInput />
-          </InputLabel>
-          <InputLabel>
-            <InputTitle>*Postal Code:</InputTitle>
-            <TextInput />
-          </InputLabel>
-          <InputLabel>
-            <InputTitle>*City:</InputTitle>
-            <TextInput />
-          </InputLabel>
-          <InputLabel>
-            <InputTitle>*Street Address:</InputTitle>
-            <TextInput />
-          </InputLabel>
-          <InputLabel>
-            <InputTitle>Address 2:</InputTitle>
-            <TextInput />
-          </InputLabel>
-        </OfficeFormInputsWrapper>
-        <OfficeFormInputsWrapper>
-          <InputLabel>
-            <InputTitle>Phone:</InputTitle>
-            <TextInput />
-          </InputLabel>
-          <InputLabel>
-            <InputTitle>Fax:</InputTitle>
-            <TextInput />
-          </InputLabel>
-          <InputLabel>
-            <InputTitle>Email:</InputTitle>
-            <TextInput />
-          </InputLabel>
-          <InputLabel>
-            <InputTitle>Office Type:</InputTitle>
-            <TextInput type="checkbox" value="Admin"/>
-            Primary HQ
-          </InputLabel>
-        </OfficeFormInputsWrapper>
-        <OfficeFormControlsWrapper>
-          <Button white>Cancel</Button>
-          <Button blue>Save</Button>
-        </OfficeFormControlsWrapper>
-      </OfficeFormWrapper>
-    );
-  }
+export function OfficeForm (props: any) {
+  const { register, handleSubmit } = useForm();
+
+  return (
+    <OfficeFormWrapper>
+      <OfficeFormInputsWrapper>
+        <InputLabel>
+          <InputTitle>*Country:</InputTitle>
+          <TextInput name="country" ref={register}/>
+        </InputLabel>
+        <InputLabel>
+          <InputTitle>*State/Province:</InputTitle>
+          <TextInput name="state" ref={register}/>
+        </InputLabel>
+        <InputLabel>
+          <InputTitle>*Postal Code:</InputTitle>
+          <TextInput name="postalCode" ref={register}/>
+        </InputLabel>
+        <InputLabel>
+          <InputTitle>*City:</InputTitle>
+          <TextInput name="city" ref={register}/>
+        </InputLabel>
+        <InputLabel>
+          <InputTitle>*Street Address:</InputTitle>
+          <TextInput name="streetAddress" ref={register}/>
+        </InputLabel>
+        <InputLabel>
+          <InputTitle>Address 2:</InputTitle>
+          <TextInput name="secondAddress" ref={register}/>
+        </InputLabel>
+      </OfficeFormInputsWrapper>
+      <OfficeFormInputsWrapper>
+        <InputLabel>
+          <InputTitle>Phone:</InputTitle>
+          <TextInput name="phone" ref={register}/>
+        </InputLabel>
+        <InputLabel>
+          <InputTitle>Fax:</InputTitle>
+          <TextInput name="fax" ref={register}/>
+        </InputLabel>
+        <InputLabel>
+          <InputTitle>Email:</InputTitle>
+          <TextInput name="email" ref={register}/>
+        </InputLabel>
+        <InputLabel>
+          <InputTitle>Office Type:</InputTitle>
+          <TextInput name="officeType" ref={register} type="checkbox" value="Admin"/>
+          Primary HQ
+        </InputLabel>
+      </OfficeFormInputsWrapper>
+      <OfficeControlsWrapper>
+        <Button white onClick={props.closeForm}>Cancel</Button>
+        <Button blue onClick={handleSubmit(props.addOffice)}>Save</Button>
+      </OfficeControlsWrapper>
+    </OfficeFormWrapper>
+  )
 }

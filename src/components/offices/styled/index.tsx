@@ -39,3 +39,15 @@ export const OfficesTitle = styled.h1<{ disabled?: boolean}>`
     `
   }
 `;
+
+export const OfficeControlsWrapper = styled.div`
+  display: flex;
+  flex-direction: inherit;
+  
+  button {
+    margin-right: 20px;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+`;

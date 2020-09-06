@@ -8,6 +8,31 @@ import { OfficeCard } from '../office-card/OfficeCard';
 import { OfficeForm } from '../office-form/OfficeForm';
 
 export class OfficesList extends Component<any, any> {
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      showForm: false,
+      offices: []
+    };
+  }
+  
+  handleFormState() {
+    this.setState({ showForm: !this.state.showForm });
+  }
+  
+  addOffice(office: any) {
+    this.setState({
+      ... this.state,
+      offices: this.state.offices.concat(office)
+    })
+  }
+  
+  renderForm(): any {
+    return this.state.showForm
+      ? <OfficeForm addOffice={this.addOffice.bind(this)} closeForm={this.handleFormState.bind(this)}/>
+      : null;
+  }
+  
   render() {
     return (
       <OfficesListWrapper>
@@ -18,14 +43,13 @@ export class OfficesList extends Component<any, any> {
         <Description>Updating your location and contact information helps you appeal to regional investors and service providers.</Description>
         <OfficeCardsContainer>
           <OfficeControlsContainer>
-            <Button white>Add New Office</Button>
-            <OfficeCount>1 Offices</OfficeCount>
+            <Button white onClick={this.handleFormState.bind(this)}>Add New Office</Button>
+            <OfficeCount>{this.state.offices.length} Offices</OfficeCount>
           </OfficeControlsContainer>
-          <OfficeForm />
-          <OfficeCard />
-          <OfficeCard />
-          <OfficeCard />
-          <OfficeCard />
+          {this.renderForm()}
+          {this.state.offices.map((office: any, index: number) => {
+            return <OfficeCard key={index} value={office}/>
+          })}
         </OfficeCardsContainer>
         <OfficesFooter />
       </OfficesListWrapper>

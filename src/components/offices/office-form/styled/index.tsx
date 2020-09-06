@@ -3,6 +3,12 @@ import styled  from 'styled-components';
 export const OfficeFormWrapper = styled.div`
   display: flex;
   flex-direction: row;
+  padding: 13px 32px 34px 0px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(215, 220, 226);
+  border-radius: 2px;
+  margin-bottom: 15px;
 `;
 
 export const OfficeFormInputsWrapper = styled.div`
@@ -12,14 +18,3 @@ export const OfficeFormInputsWrapper = styled.div`
   padding-right: 50px;
 `;
 
-export const OfficeFormControlsWrapper = styled.div`
-  display: flex;
-  flex-direction: inherit;
-  
-  button {
-    margin-right: 20px;
-    &:last-child {
-      margin-right: 0;
-    }
-  }
-`;

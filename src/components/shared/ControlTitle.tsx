@@ -22,4 +22,4 @@ export const ControlTitle = styled('a')<ControlTitleInterface>`
   &:last-child {
     margin-right: 0;
   }
-`
+`;

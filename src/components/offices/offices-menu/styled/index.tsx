@@ -25,6 +25,7 @@ export const OfficesMenuWrapper = styled.div`
   flex-direction: column;
   flex-grow: 1;
   background: rgb(233, 240, 245);
+  width: 200px;
   min-width: 200px;
 `;
 
