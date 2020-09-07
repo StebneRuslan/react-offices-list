@@ -10,39 +10,49 @@ import {
 } from './styled';
 import { Button } from '../../shared/Button';
 import { OfficeControlsWrapper } from '../styled';
+import { pick } from 'lodash';
 
 export function OfficeCard (props: any) {
   const renderPrimary = (value: boolean) => value ? <OfficeDetailsText>Primary HQ</OfficeDetailsText> : null;
-
+  const renderAddressDetails = () => {
+    const additionalAddressDetails = Object.values(pick(props.office, ['city', 'postalCode'])).join(', ');
+    const details = Object.values(pick(props.office, ['streetAddress', 'country', 'secondAddress']));
+    return [additionalAddressDetails].concat(details).map((element, index) => <OfficeDetailsText key={index}>{element}</OfficeDetailsText>);
+  };
+  const renderUserDetails = () => {
+    const details: any = pick(props.office, ['phone', 'fax', 'email']);
+    const result = [];
+    for(let key in details) {
+      result.push(
+        <OfficeDetailsContainer key={key}>
+          <OfficeDetailsTitle>{key}</OfficeDetailsTitle>
+          <OfficeDetailsText>{details[key]}</OfficeDetailsText>
+        </OfficeDetailsContainer>
+      )
+    }
+    return result;
+  };
   return (
     <OfficeCardWrapper>
       <OfficeAddressDetailsContainer>
         <OfficeDetailsTitle>Address</OfficeDetailsTitle>
         <OfficeDetails>
-          {renderPrimary(props.value.officeType)}
-          <OfficeDetailsText>{props.value.streetAddress}</OfficeDetailsText>
-          <OfficeDetailsText>{props.value.city}, {props.value.postalCode}</OfficeDetailsText>
-          <OfficeDetailsText>{props.value.country}</OfficeDetailsText>
-          <OfficeDetailsText>{props.value.secondAddress}</OfficeDetailsText>
+          {renderPrimary(props.office.officeType)}
+          {renderAddressDetails()}
         </OfficeDetails>
       </OfficeAddressDetailsContainer>
 
       <OfficeAdditionalDetailsContainer>
         <OfficeDetails>
-          <OfficeDetailsContainer>
-            <OfficeDetailsTitle>Address</OfficeDetailsTitle>
-            <OfficeDetailsText>ddfgd</OfficeDetailsText>
-          </OfficeDetailsContainer>
-          <OfficeDetailsContainer>
-            <OfficeDetailsTitle>Address</OfficeDetailsTitle>
-            <OfficeDetailsText>ddfgd</OfficeDetailsText>
-          </OfficeDetailsContainer>
+          {renderUserDetails()}
         </OfficeDetails>
       </OfficeAdditionalDetailsContainer>
 
       <OfficeControlsWrapper>
-        <Button white>Cancel</Button>
-        <Button blue>Save</Button>
+        <Button white onClick={() => {
+          props.removeOffice(props.office.id);
+        }}>Remove</Button>
+        <Button blue>Edit</Button>
       </OfficeControlsWrapper>
     </OfficeCardWrapper>
   );

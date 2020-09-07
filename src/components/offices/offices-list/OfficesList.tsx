@@ -22,7 +22,7 @@ export class OfficesList extends Component<any, any> {
   
   addOffice(office: any) {
     this.setState({
-      ... this.state,
+      ...this.state,
       offices: this.state.offices.concat(office)
     })
   }
@@ -31,6 +31,18 @@ export class OfficesList extends Component<any, any> {
     return this.state.showForm
       ? <OfficeForm addOffice={this.addOffice.bind(this)} closeForm={this.handleFormState.bind(this)}/>
       : null;
+  }
+  
+  removeOffice(id: string): void {
+    const position = this.state.offices.findIndex((office: any) => office.id === id);
+    const newOffices = [...this.state.offices];
+    newOffices.splice(position, 1);
+    if (position > -1) {
+      this.setState({
+        ...this.state,
+        offices: newOffices
+      })
+    }
   }
   
   render() {
@@ -48,7 +60,10 @@ export class OfficesList extends Component<any, any> {
           </OfficeControlsContainer>
           {this.renderForm()}
           {this.state.offices.map((office: any, index: number) => {
-            return <OfficeCard key={index} value={office}/>
+            return <OfficeCard
+              key={index}
+              office={office}
+              removeOffice={this.removeOffice.bind(this)}/>
           })}
         </OfficeCardsContainer>
         <OfficesFooter />
