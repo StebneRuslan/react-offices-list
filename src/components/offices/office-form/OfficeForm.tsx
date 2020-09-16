@@ -2,16 +2,18 @@ import React from 'react';
 import { OfficeFormInputsWrapper, OfficeFormWrapper } from './styled';
 import { Button } from '../../shared/Button';
 import { InputLabel, InputTitle, TextInput } from '../../shared/TextInput';
-import { useForm } from "react-hook-form";
+import { useForm } from 'react-hook-form';
 import { OfficeControlsWrapper } from '../styled';
 // @ts-ignore
 import uuid from 'react-uuid'
 
 export function OfficeForm (props: any) {
   const { register, handleSubmit } = useForm();
-
-  const addOffice = (office: any) => {
-    props.addOffice({ id: uuid(), ...office })
+  
+  const saveOffice = (office: any) => {
+    props.editable
+      ? props.saveOffice({ id: uuid(), editable: false, ...office })
+      : props.saveOffice({ editable: false, ...office })
   };
   
   return (
@@ -63,7 +65,7 @@ export function OfficeForm (props: any) {
       </OfficeFormInputsWrapper>
       <OfficeControlsWrapper>
         <Button white onClick={props.closeForm}>Cancel</Button>
-        <Button blue onClick={handleSubmit(addOffice)}>Save</Button>
+        <Button blue onClick={handleSubmit(saveOffice)}>Save</Button>
       </OfficeControlsWrapper>
     </OfficeFormWrapper>
   )

@@ -27,10 +27,23 @@ export class OfficesList extends Component<any, any> {
     })
   }
   
+  updateOffice(newOffice: any): void {
+    debugger;
+    const position = this.state.offices.findIndex((office: any) => office.id === newOffice.id);
+    const editableOffice = Object.assign({}, { ...newOffice, editable: true });
+    if (position > -1) {
+      this.setState({ offices: Object.assign([], this.state.offices, { [position]: editableOffice }) })
+    }
+  }
+  
   renderForm(): any {
     return this.state.showForm
-      ? <OfficeForm addOffice={this.addOffice.bind(this)} closeForm={this.handleFormState.bind(this)}/>
+      ? <OfficeForm saveOffice={this.addOffice.bind(this)} closeForm={this.handleFormState.bind(this)}/>
       : null;
+  }
+  
+  renderEditableForm(index: number): any {
+    return <OfficeForm key={index} editable={true} saveOffice={this.updateOffice.bind(this)} closeForm={this.handleFormState.bind(this)}/>
   }
   
   removeOffice(id: string): void {
@@ -38,10 +51,15 @@ export class OfficesList extends Component<any, any> {
     const newOffices = [...this.state.offices];
     newOffices.splice(position, 1);
     if (position > -1) {
-      this.setState({
-        ...this.state,
-        offices: newOffices
-      })
+      this.setState({ offices: newOffices })
+    }
+  }
+  
+  openEditForm(id: string): void {
+    const position = this.state.offices.findIndex((office: any) => office.id === id);
+    const editableOffice = Object.assign({}, { ...this.state.offices[position], editable: true });
+    if (position > -1) {
+      this.setState({ offices: Object.assign([], this.state.offices, { [position]: editableOffice }) })
     }
   }
   
@@ -60,10 +78,14 @@ export class OfficesList extends Component<any, any> {
           </OfficeControlsContainer>
           {this.renderForm()}
           {this.state.offices.map((office: any, index: number) => {
-            return <OfficeCard
+            return office.editable
+              ? this.renderEditableForm(index)
+              : <OfficeCard
               key={index}
               office={office}
-              removeOffice={this.removeOffice.bind(this)}/>
+              removeOffice={this.removeOffice.bind(this)}
+              editOffice={this.openEditForm.bind(this)}
+            />
           })}
         </OfficeCardsContainer>
         <OfficesFooter />

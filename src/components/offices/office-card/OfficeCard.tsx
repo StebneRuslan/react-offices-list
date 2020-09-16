@@ -49,10 +49,8 @@ export function OfficeCard (props: any) {
       </OfficeAdditionalDetailsContainer>
 
       <OfficeControlsWrapper>
-        <Button white onClick={() => {
-          props.removeOffice(props.office.id);
-        }}>Remove</Button>
-        <Button blue>Edit</Button>
+        <Button white onClick={() => props.removeOffice(props.office.id)}>Remove</Button>
+        <Button blue onClick={() => props.editOffice(props.office.id)}>Edit</Button>
       </OfficeControlsWrapper>
     </OfficeCardWrapper>
   );
