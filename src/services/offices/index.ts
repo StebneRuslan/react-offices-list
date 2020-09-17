@@ -16,6 +16,11 @@ export function addOffice(office: OfficeModel) {
     .then(({ data }: any) => ({ ...office, name: data.name }))
 }
 
+export function updateOffice(office: OfficeModel) {
+  return api.put(`${OFFICE_BASE_URL}/offices/${office.name}.json`, office)
+    .then(({ data }: any) => ({ ...office, name: data.name }))
+}
+
 export function getOfficesList() {
   return api.get(`${OFFICE_BASE_URL}/offices.json`)
     .then(({ data }: any) => handleOfficeName(data))

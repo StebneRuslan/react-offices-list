@@ -26,32 +26,43 @@ export class OfficesList extends Component<any, any> {
   }
   
   handleFormState() {
-    this.setState({ showForm: !this.state.showForm });
+    this.setState({showForm: !this.state.showForm });
   }
   
   addOffice(office: any) {
     this.setState({
-      offices: this.state.offices.concat(office)
+      offices: this.state.offices.concat(office),
+      showForm: false
     })
   }
   
-  updateOffice(newOffice: any): void {
-    debugger;
-    const position = this.state.offices.findIndex((office: any) => office.id === newOffice.id);
-    const editableOffice = Object.assign({}, { ...newOffice, editable: true });
+  updateOffice(newOffice: OfficeModel): void {
+    const position = this.state.offices.findIndex((office: any) => office.name === newOffice.name);
+    const editableOffice = Object.assign({}, { ...newOffice });
     if (position > -1) {
-      this.setState({ offices: Object.assign([], this.state.offices, { [position]: editableOffice }) })
+      this.setState({
+        offices: Object.assign([], this.state.offices, { [position]: editableOffice })
+      })
     }
   }
   
   renderNewForm(): any {
     return this.state.showForm
-      ? <OfficeForm saveOffice={this.addOffice.bind(this)} closeForm={this.handleFormState.bind(this)}/>
+      ? <OfficeForm
+        saveOffice={this.addOffice.bind(this)}
+        closeForm={this.handleFormState.bind(this)}
+      />
       : null;
   }
   
-  renderEditableForm(index: number): any {
-    return <OfficeForm key={index} editable={true} saveOffice={this.updateOffice.bind(this)} closeForm={this.handleFormState.bind(this)}/>
+  renderEditableForm(office: OfficeModel, index: number): any {
+    return <OfficeForm
+      key={index}
+      editable={true}
+      saveOffice={this.updateOffice.bind(this)}
+      closeForm={this.handleEditForm.bind(this)}
+      office={office}
+    />
   }
   
   removeOffice(name: string): void {
@@ -66,9 +77,9 @@ export class OfficesList extends Component<any, any> {
       })
   }
   
-  openEditForm(id: string): void {
-    const position = this.state.offices.findIndex((office: any) => office.id === id);
-    const editableOffice = Object.assign({}, { ...this.state.offices[position], editable: true });
+  handleEditForm(name: string, editable: boolean): void {
+    const position = this.state.offices.findIndex((office: any) => office.name === name);
+    const editableOffice = Object.assign({}, { ...this.state.offices[position], editable });
     if (position > -1) {
       this.setState({ offices: Object.assign([], this.state.offices, { [position]: editableOffice }) })
     }
@@ -90,12 +101,12 @@ export class OfficesList extends Component<any, any> {
           {this.renderNewForm()}
           {this.state.offices.map((office: any, index: number) => {
             return office.editable
-              ? this.renderEditableForm(index)
+              ? this.renderEditableForm(office, index)
               : <OfficeCard
               key={index}
               office={office}
               removeOffice={this.removeOffice.bind(this)}
-              editOffice={this.openEditForm.bind(this)}
+              editOffice={this.handleEditForm.bind(this)}
             />
           })}
         </OfficeCardsContainer>

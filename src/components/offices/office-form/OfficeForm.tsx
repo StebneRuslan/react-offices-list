@@ -15,16 +15,20 @@ interface OfficeFormInterface {
 }
 
 export function OfficeForm (props: OfficeFormInterface) {
-  const { register, handleSubmit } = useForm<OfficeModel>();
+  const { register, handleSubmit } = useForm<OfficeModel>({
+    defaultValues: { ...props.office }
+  });
   
   const saveOffice = (office: OfficeModel) => {
-    officeService.addOffice(office)
-      .then((office: OfficeModel) => {
-        props.saveOffice({ editable: false, ...office })
-      })
-      .catch((err: any) => {
-        console.log('rerer', err);
-      })
+    !props.office
+      ? officeService.addOffice(office)
+        .then((office: OfficeModel) => {
+          props.saveOffice({ editable: false, ...office })
+        })
+      : officeService.updateOffice({ name: props.office.name, ...office })
+        .then((office: OfficeModel) => {
+          props.saveOffice({ editable: false, ...office })
+        })
   };
   
   return (
@@ -75,7 +79,10 @@ export function OfficeForm (props: OfficeFormInterface) {
         </InputLabel>
       </OfficeFormInputsWrapper>
       <OfficeControlsWrapper>
-        <Button white onClick={props.closeForm}>Cancel</Button>
+        <Button white onClick={() => props.office
+          ? props.closeForm(props.office.name, false)
+          : props.closeForm()
+        }>Cancel</Button>
         <Button blue onClick={handleSubmit(saveOffice)}>Save</Button>
       </OfficeControlsWrapper>
     </OfficeFormWrapper>
