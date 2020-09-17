@@ -4,16 +4,27 @@ import { Button } from '../../shared/Button';
 import { InputLabel, InputTitle, TextInput } from '../../shared/TextInput';
 import { useForm } from 'react-hook-form';
 import { OfficeControlsWrapper } from '../styled';
-// @ts-ignore
-import uuid from 'react-uuid'
+import { OfficeModel } from '../../../models/office.model';
+import * as officeService from '../../../services/offices';
 
-export function OfficeForm (props: any) {
-  const { register, handleSubmit } = useForm();
+interface OfficeFormInterface {
+  saveOffice: Function;
+  closeForm: any;
+  editable?: boolean;
+  office?: OfficeModel;
+}
+
+export function OfficeForm (props: OfficeFormInterface) {
+  const { register, handleSubmit } = useForm<OfficeModel>();
   
-  const saveOffice = (office: any) => {
-    props.editable
-      ? props.saveOffice({ id: uuid(), editable: false, ...office })
-      : props.saveOffice({ editable: false, ...office })
+  const saveOffice = (office: OfficeModel) => {
+    officeService.addOffice(office)
+      .then((office: OfficeModel) => {
+        props.saveOffice({ editable: false, ...office })
+      })
+      .catch((err: any) => {
+        console.log('rerer', err);
+      })
   };
   
   return (

@@ -6,6 +6,8 @@ import { OfficesFooter } from '../offices-footer/OfficesFooter';
 import { Button } from '../../shared/Button';
 import { OfficeCard } from '../office-card/OfficeCard';
 import { OfficeForm } from '../office-form/OfficeForm';
+import { getOfficesList, removeOffice } from '../../../services/offices';
+import { OfficeModel } from '../../../models/office.model';
 
 export class OfficesList extends Component<any, any> {
   constructor(props: any) {
@@ -16,13 +18,19 @@ export class OfficesList extends Component<any, any> {
     };
   }
   
+  componentDidMount(): void {
+    getOfficesList()
+      .then((offices: OfficeModel[]) => {
+        this.setState({ offices })
+      })
+  }
+  
   handleFormState() {
     this.setState({ showForm: !this.state.showForm });
   }
   
   addOffice(office: any) {
     this.setState({
-      ...this.state,
       offices: this.state.offices.concat(office)
     })
   }
@@ -36,7 +44,7 @@ export class OfficesList extends Component<any, any> {
     }
   }
   
-  renderForm(): any {
+  renderNewForm(): any {
     return this.state.showForm
       ? <OfficeForm saveOffice={this.addOffice.bind(this)} closeForm={this.handleFormState.bind(this)}/>
       : null;
@@ -46,13 +54,16 @@ export class OfficesList extends Component<any, any> {
     return <OfficeForm key={index} editable={true} saveOffice={this.updateOffice.bind(this)} closeForm={this.handleFormState.bind(this)}/>
   }
   
-  removeOffice(id: string): void {
-    const position = this.state.offices.findIndex((office: any) => office.id === id);
-    const newOffices = [...this.state.offices];
-    newOffices.splice(position, 1);
-    if (position > -1) {
-      this.setState({ offices: newOffices })
-    }
+  removeOffice(name: string): void {
+    removeOffice(name)
+      .then(() => {
+        const position = this.state.offices.findIndex((office: OfficeModel) => office.name === name);
+        const newOffices = [...this.state.offices];
+        newOffices.splice(position, 1);
+        if (position > -1) {
+          this.setState({ offices: newOffices })
+        }
+      })
   }
   
   openEditForm(id: string): void {
@@ -76,7 +87,7 @@ export class OfficesList extends Component<any, any> {
             <Button white onClick={this.handleFormState.bind(this)}>Add New Office</Button>
             <OfficeCount>{this.state.offices.length} Offices</OfficeCount>
           </OfficeControlsContainer>
-          {this.renderForm()}
+          {this.renderNewForm()}
           {this.state.offices.map((office: any, index: number) => {
             return office.editable
               ? this.renderEditableForm(index)
