@@ -7,9 +7,9 @@ import {
   OfficeDetailsText,
   OfficeDetailsTitle,
   OfficeDetailsContainer
-} from './styled';
+} from './elements';
 import { Button } from '../../shared/Button';
-import { OfficeControlsWrapper } from '../styled';
+import { OfficeControlsWrapper } from '../elements';
 import { pick } from 'lodash';
 
 export function OfficeCard (props: any) {

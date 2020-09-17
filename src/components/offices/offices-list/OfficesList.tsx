@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { OfficesListWrapper, OfficeControlsContainer, OfficeCount, OfficeCardsContainer } from './styled';
-import { OfficesTitle, OfficesTitleWrapper } from '../styled';
+import { OfficesListWrapper, OfficeControlsContainer, OfficeCount, OfficeCardsContainer } from './elements';
+import { OfficesTitle, OfficesTitleWrapper } from '../elements';
 import { Description } from '../../shared/Description';
 import { OfficesFooter } from '../offices-footer/OfficesFooter';
 import { Button } from '../../shared/Button';

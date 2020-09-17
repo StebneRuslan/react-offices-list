@@ -5,7 +5,7 @@ import {
   HeaderNavigationWrapper,
   ImgWrapper,
   MainHeaderWrapper
-} from './styled'
+} from './elements'
 import { ControlTitle } from '../shared/ControlTitle';
 
 interface HeaderProps {}

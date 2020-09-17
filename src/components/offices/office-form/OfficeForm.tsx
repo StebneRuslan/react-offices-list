@@ -1,9 +1,9 @@
 import React from 'react';
-import { OfficeFormInputsWrapper, OfficeFormWrapper } from './styled';
+import { OfficeFormInputsWrapper, OfficeFormWrapper } from './elements';
 import { Button } from '../../shared/Button';
 import { InputLabel, InputTitle, TextInput } from '../../shared/TextInput';
 import { useForm } from 'react-hook-form';
-import { OfficeControlsWrapper } from '../styled';
+import { OfficeControlsWrapper } from '../elements';
 import { OfficeModel } from '../../../models/office.model';
 import * as officeService from '../../../services/offices';
 

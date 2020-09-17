@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { OfficesFooterControl, OfficesFooterWrapper } from './styled';
+import { OfficesFooterControl, OfficesFooterWrapper } from './elements';
 import { Button } from '../../shared/Button';
 
 export const OfficesFooter: FunctionComponent = () =>

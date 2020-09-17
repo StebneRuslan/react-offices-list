@@ -6,7 +6,7 @@ import {
   OfficeMenuTitleWrapper,
   OpenedMenuTitle,
   OpenedMenuWrapper
-} from './styled';
+} from './elements';
 
 import menuHeader from '../../../images/menu-header.svg';
 

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { InputTitle } from '../../../shared/TextInput';
+import { InputTitle } from '../../shared/TextInput';
 
 export const OfficeCardWrapper = styled.div`
   display: flex;
