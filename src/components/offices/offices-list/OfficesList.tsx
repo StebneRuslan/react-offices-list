@@ -19,10 +19,7 @@ export class OfficesList extends Component<any, any> {
   }
   
   componentDidMount(): void {
-    getOfficesList()
-      .then((offices: OfficeModel[]) => {
-        this.setState({ offices })
-      })
+    this.props.getOfficeList();
   }
   
   handleFormState() {
