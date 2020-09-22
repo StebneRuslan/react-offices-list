@@ -21,10 +21,7 @@ export function OfficeForm (props: OfficeFormInterface) {
   
   const saveOffice = (office: OfficeModel) => {
     !props.office
-      ? officeService.addOffice(office)
-        .then((office: OfficeModel) => {
-          props.saveOffice({ editable: false, ...office })
-        })
+      ? props.saveOffice({ editable: false, ...office })
       : officeService.updateOffice({ name: props.office.name, ...office })
         .then((office: OfficeModel) => {
           props.saveOffice({ editable: false, ...office })

@@ -6,12 +6,15 @@ import { OfficesState } from '../../../redux/offices/reducer';
 import actions from '../../../redux/offices/actions';
 
 const mapStateToProps = (state: { office: OfficesState }) => ({
-  errorMessage: state.office.errorMessage
+  errorMessage: state.office.errorMessage,
+  offices: state.office.offices.response
 });
 
 const mapDispatchToProps = (dispatch: any) => (
   bindActionCreators({
-    getOfficeList: actions.getOfficeList
+    getOfficeList: actions.getOfficeList,
+    removeOffice: actions.removeOffice,
+    createOffice: actions.createOffice
   }, dispatch)
 );
 

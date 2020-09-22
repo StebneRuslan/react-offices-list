@@ -32,6 +32,23 @@ export default (state: OfficesState = initialState, action: any) => {
           }
         }
       });
+    case officeActions.CREATE_OFFICE_SUCCESS:
+      return update(state, {
+        offices: {
+          response: {
+            $push: [action.payload]
+          }
+        }
+      });
+    case officeActions.REMOVE_OFFICE_SUCCESS:
+      const position = state.offices.response.findIndex((office: OfficeModel) => office.name === action.payload);
+      return update(state, {
+        offices: {
+          response: {
+            $splice: [[position, 1]]
+          }
+        }
+      });
     default:
       return state;
   }
