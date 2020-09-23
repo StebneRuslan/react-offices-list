@@ -31,8 +31,18 @@ function * removeOffice(action: { type: string; payload: string }) {
   }
 }
 
+function * updateOffice(action: { type: string; payload: OfficeModel }) {
+  try {
+    const response = yield call(officeService.updateOffice, action.payload);
+    yield put(officeActions.updateOfficeSuccess(response))
+  } catch (error) {
+    yield put(officeActions.updateOfficeError(error.message))
+  }
+}
+
 export default {
   getOffices,
   removeOffice,
-  addOffice
+  addOffice,
+  updateOffice
 }

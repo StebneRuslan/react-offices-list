@@ -9,5 +9,6 @@ export interface OfficeModel {
   fax: string;
   email: string;
   officeType: boolean;
-  name: string
+  name: string,
+  editable: false
 }

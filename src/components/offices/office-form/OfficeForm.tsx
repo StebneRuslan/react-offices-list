@@ -5,12 +5,13 @@ import { InputLabel, InputTitle, TextInput } from '../../shared/TextInput';
 import { useForm } from 'react-hook-form';
 import { OfficeControlsWrapper } from '../elements';
 import { OfficeModel } from '../../../models/office.model';
-import * as officeService from '../../../services/offices';
 
 interface OfficeFormInterface {
-  saveOffice: Function;
-  closeForm: any;
-  editable?: boolean;
+  createOffice: Function;
+  closeNewOfficeForm: Function;
+  updateOffice: Function;
+  toggleEditableOfficeForm: Function;
+  name: string;
   office?: OfficeModel;
 }
 
@@ -20,12 +21,15 @@ export function OfficeForm (props: OfficeFormInterface) {
   });
   
   const saveOffice = (office: OfficeModel) => {
-    !props.office
-      ? props.saveOffice({ editable: false, ...office })
-      : officeService.updateOffice({ name: props.office.name, ...office })
-        .then((office: OfficeModel) => {
-          props.saveOffice({ editable: false, ...office })
-        })
+    props.office
+      ? props.updateOffice({ editable: false, name: props.office.name, ...office })
+      : props.createOffice({ editable: false, ...office });
+  };
+  
+  const handleClose = () => {
+    props.office
+      ? props.toggleEditableOfficeForm(props.name)
+      : props.closeNewOfficeForm()
   };
   
   return (
@@ -76,10 +80,7 @@ export function OfficeForm (props: OfficeFormInterface) {
         </InputLabel>
       </OfficeFormInputsWrapper>
       <OfficeControlsWrapper>
-        <Button white onClick={() => props.office
-          ? props.closeForm(props.office.name, false)
-          : props.closeForm()
-        }>Cancel</Button>
+        <Button white onClick={handleClose}>Cancel</Button>
         <Button blue onClick={handleSubmit(saveOffice)}>Save</Button>
       </OfficeControlsWrapper>
     </OfficeFormWrapper>

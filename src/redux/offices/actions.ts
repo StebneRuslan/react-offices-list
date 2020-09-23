@@ -1,6 +1,9 @@
 import actionTypes from './action-types'
 import { OfficeModel } from '../../models/office.model';
 
+const toggleNewOfficeForm = () => ({ type: actionTypes.TOGGLE_NEW_OFFICE_FORM });
+const toggleEditableOfficeForm = (data: string) => ({ type: actionTypes.TOGGLE_EDITABLE_OFFICE_FORM, payload: data });
+
 const getOfficeList = () => ({ type: actionTypes.GET_OFFICES });
 const getOfficeListSuccess = (data: OfficeModel[]) => ({ type: actionTypes.GET_OFFICES_SUCCESS, payload: data });
 const getOfficeListError = (data: string) => ({ type: actionTypes.GET_OFFICES_ERROR, err: data });
@@ -14,9 +17,12 @@ const removeOfficeSuccess = (data: string) => ({ type: actionTypes.REMOVE_OFFICE
 const removeOfficeError = (data: string) => ({ type: actionTypes.REMOVE_OFFICE_ERROR, err: data});
 
 const updateOffice = (data: OfficeModel) => ({ type: actionTypes.UPDATE_OFFICE, payload: data});
-const deleteOffice = (data: string) => ({ type: actionTypes.DELETE_OFFICE, payload: data});
+const updateOfficeSuccess = (data: OfficeModel) => ({ type: actionTypes.UPDATE_OFFICE_SUCCESS, payload: data});
+const updateOfficeError = (data: string) => ({ type: actionTypes.UPDATE_OFFICE_ERROR, payload: data});
 
 export default {
+  toggleNewOfficeForm,
+  toggleEditableOfficeForm,
   getOfficeList,
   getOfficeListSuccess,
   getOfficeListError,
@@ -27,5 +33,6 @@ export default {
   removeOfficeSuccess,
   removeOfficeError,
   updateOffice,
-  deleteOffice
+  updateOfficeSuccess,
+  updateOfficeError
 }
