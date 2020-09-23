@@ -88,7 +88,6 @@ export default (state: OfficesState = initialState, action: any) => {
     case officeActions.GET_OFFICES:
     case officeActions.REMOVE_OFFICE:
     case officeActions.UPDATE_OFFICE:
-      debugger;
       return update(state, {
         offices: {
           isFetching: { $set: true }
