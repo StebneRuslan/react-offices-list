@@ -7,10 +7,10 @@ import { OfficeControlsWrapper } from '../elements';
 import { OfficeModel } from '../../../models/office.model';
 
 interface OfficeFormInterface {
-  createOffice: Function;
-  closeNewOfficeForm: Function;
-  updateOffice: Function;
-  toggleEditableOfficeForm: Function;
+  createOffice: (office: OfficeModel) => void;
+  closeNewOfficeForm: () => void;
+  updateOffice: (office: OfficeModel) => void;
+  toggleEditableOfficeForm: (name: string) => void;
   name: string;
   office?: OfficeModel;
 }

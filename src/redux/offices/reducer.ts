@@ -22,6 +22,10 @@ export const initialState: OfficesState = {
   errorMessage: ''
 };
 
+function getOfficePosition(state: OfficesState, name: string) {
+  return state.offices.response.findIndex((office: OfficeModel) => office.name === name);
+}
+
 export default (state: OfficesState = initialState, action: any) => {
   switch (action.type) {
     case officeActions.TOGGLE_NEW_OFFICE_FORM:
@@ -29,7 +33,7 @@ export default (state: OfficesState = initialState, action: any) => {
         showForm: { $set: !state.showForm }
       });
     case officeActions.TOGGLE_EDITABLE_OFFICE_FORM:
-      const editPosition = state.offices.response.findIndex((office: OfficeModel) => office.name === action.payload);
+      const editPosition = getOfficePosition(state, action.payload);
       return update(state, {
         offices: {
           response: {
@@ -45,7 +49,7 @@ export default (state: OfficesState = initialState, action: any) => {
         }
       });
     case officeActions.UPDATE_OFFICE_SUCCESS:
-      const updatePosition = state.offices.response.findIndex((office: OfficeModel) => office.name === action.payload.name);
+      const updatePosition = getOfficePosition(state, action.payload.name);
       return update(state, {
         offices: {
           response: {
@@ -74,7 +78,7 @@ export default (state: OfficesState = initialState, action: any) => {
         showForm: { $set: false }
       });
     case officeActions.REMOVE_OFFICE_SUCCESS:
-      const position = state.offices.response.findIndex((office: OfficeModel) => office.name === action.payload);
+      const position = getOfficePosition(state, action.payload);
       return update(state, {
         offices: {
           response: {
