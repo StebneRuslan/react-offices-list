@@ -1,6 +1,11 @@
 import actionTypes from './action-types'
 import { OfficeModel } from '../../models/office.model';
 
+export interface OfficeActionInterface {
+  type: string,
+  payload: OfficeModel | string
+}
+
 const toggleNewOfficeForm = () => ({ type: actionTypes.TOGGLE_NEW_OFFICE_FORM });
 const toggleEditableOfficeForm = (data: string) => ({ type: actionTypes.TOGGLE_EDITABLE_OFFICE_FORM, payload: data });
 
