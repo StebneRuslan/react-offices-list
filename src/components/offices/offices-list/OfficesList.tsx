@@ -16,7 +16,7 @@ import { Spinner } from '../../shared/Loader';
 // models
 import { OfficeModel } from '../../../models/office.model';
 
-interface OfficesListInterface {
+export interface OfficesListInterface {
   isFetching: boolean;
   toggleNewOfficeForm: () => void;
   getOfficeList: () => void;
@@ -41,7 +41,7 @@ export function OfficesList({ isFetching, toggleNewOfficeForm, getOfficeList, of
       </Description>
       <OfficeCardsContainer>
         <OfficeControlsContainer>
-          <Button white onClick={toggleNewOfficeForm}>Add New Office</Button>
+          <Button id="toggle-new-office-form" white onClick={toggleNewOfficeForm}>Add New Office</Button>
           <OfficeCount>{offices.length} Offices</OfficeCount>
         </OfficeControlsContainer>
         {showForm && <OfficeFormContainer name='' />}

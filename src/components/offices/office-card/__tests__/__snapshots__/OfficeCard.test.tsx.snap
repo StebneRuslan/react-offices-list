@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<OfficeCard /> OfficeCard renders without crashing 1`] = `
+<styled.div>
+  <styled.div>
+    <Styled(styled.span)>
+      Address
+    </Styled(styled.span)>
+    <styled.div>
+      <styled.p
+        key="0"
+      />
+    </styled.div>
+  </styled.div>
+  <Styled(styled.div)>
+    <styled.div />
+  </Styled(styled.div)>
+  <styled.div>
+    <styled.button
+      id="remove-office-button"
+      onClick={[Function]}
+      white={true}
+    >
+      Remove
+    </styled.button>
+    <styled.button
+      blue={true}
+      id="toggle-editable-office-button"
+      onClick={[Function]}
+    >
+      Edit
+    </styled.button>
+  </styled.div>
+</styled.div>
+`;

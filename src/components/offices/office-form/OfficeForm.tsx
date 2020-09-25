@@ -5,6 +5,9 @@ import { InputLabel, InputTitle, TextInput } from '../../shared/TextInput';
 import { useForm } from 'react-hook-form';
 import { OfficeControlsWrapper } from '../elements';
 import { OfficeModel } from '../../../models/office.model';
+import { officeFormSchema } from './office-form-scema';
+import { yupResolver } from '@hookform/resolvers';
+import { officeFormFieldInterface, officeFormFields } from './office-form-model';
 
 interface OfficeFormInterface {
   createOffice: (office: OfficeModel) => void;
@@ -16,8 +19,9 @@ interface OfficeFormInterface {
 }
 
 export function OfficeForm (props: OfficeFormInterface) {
-  const { register, handleSubmit } = useForm<OfficeModel>({
-    defaultValues: { ...props.office }
+  const { register, handleSubmit, errors } = useForm<OfficeModel>({
+    defaultValues: { ...props.office },
+    resolver: yupResolver(officeFormSchema)
   });
   
   const saveOffice = (office: OfficeModel) => {
@@ -27,57 +31,25 @@ export function OfficeForm (props: OfficeFormInterface) {
   };
   
   const handleClose = () => {
-    props.office
-      ? props.toggleEditableOfficeForm(props.name)
-      : props.closeNewOfficeForm()
+    props.office ? props.toggleEditableOfficeForm(props.name) : props.closeNewOfficeForm()
   };
   
   return (
     <OfficeFormWrapper>
       <OfficeFormInputsWrapper>
-        <InputLabel>
-          <InputTitle>*Country:</InputTitle>
-          <TextInput name="country" ref={register}/>
-        </InputLabel>
-        <InputLabel>
-          <InputTitle>*State/Province:</InputTitle>
-          <TextInput name="state" ref={register}/>
-        </InputLabel>
-        <InputLabel>
-          <InputTitle>*Postal Code:</InputTitle>
-          <TextInput name="postalCode" ref={register}/>
-        </InputLabel>
-        <InputLabel>
-          <InputTitle>*City:</InputTitle>
-          <TextInput name="city" ref={register}/>
-        </InputLabel>
-        <InputLabel>
-          <InputTitle>*Street Address:</InputTitle>
-          <TextInput name="streetAddress" ref={register}/>
-        </InputLabel>
-        <InputLabel>
-          <InputTitle>Address 2:</InputTitle>
-          <TextInput name="secondAddress" ref={register}/>
-        </InputLabel>
+        {officeFormFields.addressConfig.map((details: officeFormFieldInterface, index: number) =>
+          <InputLabel key={index}>
+            <InputTitle>{details.title}</InputTitle>
+            <TextInput error={!!errors.country} name={details.name} ref={register} type={details.type}/>
+          </InputLabel>)}
       </OfficeFormInputsWrapper>
       <OfficeFormInputsWrapper>
-        <InputLabel>
-          <InputTitle>Phone:</InputTitle>
-          <TextInput name="phone" ref={register}/>
-        </InputLabel>
-        <InputLabel>
-          <InputTitle>Fax:</InputTitle>
-          <TextInput name="fax" ref={register}/>
-        </InputLabel>
-        <InputLabel>
-          <InputTitle>Email:</InputTitle>
-          <TextInput name="email" ref={register}/>
-        </InputLabel>
-        <InputLabel>
-          <InputTitle>Office Type:</InputTitle>
-          <TextInput name="officeType" ref={register} type="checkbox" value="Admin"/>
-          Primary HQ
-        </InputLabel>
+        {officeFormFields.personalDataConfigs.map((details: officeFormFieldInterface, index: number) =>
+          <InputLabel key={index}>
+            <InputTitle>{details.title}</InputTitle>
+            <TextInput error={!!errors.country} name={details.name} ref={register} type={details.type}/>
+            { details.type === 'checkbox' ? 'Primary HQ' : null}
+          </InputLabel>)}
       </OfficeFormInputsWrapper>
       <OfficeControlsWrapper>
         <Button white onClick={handleClose}>Cancel</Button>

@@ -49,8 +49,8 @@ export function OfficeCard (props: any) {
       </OfficeAdditionalDetailsContainer>
 
       <OfficeControlsWrapper>
-        <Button white onClick={() => props.removeOffice(props.office.name)}>Remove</Button>
-        <Button blue onClick={() => props.toggleEditableOfficeForm(props.office.name)}>Edit</Button>
+        <Button white id='remove-office-button' onClick={() => props.removeOffice(props.office.name)}>Remove</Button>
+        <Button blue id='toggle-editable-office-button' onClick={() => props.toggleEditableOfficeForm(props.office.name)}>Edit</Button>
       </OfficeControlsWrapper>
     </OfficeCardWrapper>
   );

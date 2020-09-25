@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<OfficesList /> OfficeCard renders without crashing 1`] = `
+<styled.div>
+  <styled.div>
+    <styled.h1>
+      OFFICES
+    </styled.h1>
+    <styled.h1
+      disabled={true}
+    >
+      COMPANY INFO
+    </styled.h1>
+  </styled.div>
+  <styled.div>
+    Updating your location and contact information helps you appeal to regional investors and service providers.
+  </styled.div>
+  <styled.div>
+    <styled.div>
+      <styled.button
+        id="toggle-new-office-form"
+        onClick={[MockFunction]}
+        white={true}
+      >
+        Add New Office
+      </styled.button>
+      <styled.p>
+        1
+         Offices
+      </styled.p>
+    </styled.div>
+    <Connect(OfficeCard)
+      key="0"
+      office={
+        Object {
+          "city": "city",
+          "country": "country",
+          "editable": false,
+          "email": "email@appcreative.net",
+          "fax": "fax",
+          "name": "name",
+          "officeType": false,
+          "phone": "88888888",
+          "postalCode": "code",
+          "secondAddress": "secondAddress",
+          "state": "state",
+          "streetAddress": "secondAddress",
+        }
+      }
+    />
+  </styled.div>
+  <OfficesFooter />
+</styled.div>
+`;
