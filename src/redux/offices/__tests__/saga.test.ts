@@ -2,7 +2,7 @@ import { runSaga } from 'redux-saga';
 import actions, { OfficeActionInterface } from '../actions';
 import * as officeApi from '../../../services/offices';
 import saga from '../saga';
-import { mockedOffice } from './mock/mock';
+import { mockedOffice } from '../mock/mock';
 
 describe('Office saga', () => {
   it('should call api and dispatch success action', async () => {

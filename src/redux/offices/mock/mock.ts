@@ -1,4 +1,4 @@
-import { OfficeModel } from '../../../../models/office.model';
+import { OfficeModel } from '../../../models/office.model';
 
 export const mockedOffice: OfficeModel = {
   officeType: false,

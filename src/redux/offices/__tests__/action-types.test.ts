@@ -1,6 +1,6 @@
 import actions from '../actions'
 import types from '../action-types'
-import { mockedOffice } from './mock/mock';
+import { mockedOffice } from '../mock/mock';
 
 describe('Office actions', () => {
   // Create office actions

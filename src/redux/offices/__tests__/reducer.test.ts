@@ -1,6 +1,6 @@
 import reducer, { OfficesState } from '../reducer'
 import types from '../action-types'
-import { mockedOffice } from './mock/mock';
+import { mockedOffice } from '../mock/mock';
 
 const initialState: OfficesState = {
   offices: { response: [], error: '', isFetching: false },
